@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rogerspy's Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/vue.css" />
+  <!-- custom -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+  <link rel="stylesheet" href="//unpkg.com/prismjs@1.17.1/themes/prism-default.css" />
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: '数据结构与算法',
+      repo: 'https://github.com/Rogerspy',
+	  toc: {
+	    tocMaxLevel: 5,
+        target: 'h2, h3, h4, h5, h6'
+	  },
+	  loadSidebar: true,
+	  alias: {
+      '/.*/_sidebar.md': '/_sidebar.md'
+      },
+	  themeColor: '#1bc3fb',
+	  search: {
+        depth: 5,
+        noData: 'No results!',
+        placeholder: 'Search...'
+      },
+	  plugins: [
+          function (hook) {
+            // 支持$和$$
+            hook.doneEach(function () {
+              if (typeof MathJax !== "undefined") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+              }
+            });
+            // 支持$``$
+            hook.beforeEach(function (content) {
+              return content.replace(/\$`.*`\$/g, function (a) {
+                return a.replace("`", "").replace("`", "");
+              });
+            });
+            // 支持```math```块
+            hook.beforeEach(function (content) {
+              return content.replace("\r\n","\n");
+            });
+            hook.beforeEach(function (content) {
+              return content.replace("\r","\n");
+            });
+            hook.beforeEach(function (content) {
+              c = content.replace(
+                /```math\n[^`]*\n```/g,
+                function (a) {
+                  return a
+                    .replace("```math", "\$\$\$\$")
+                    .replace("```", "\$\$\$\$");
+                }
+              );
+              return c
+            });
+          },
+        ]
+    }
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- Custom -->
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processClass: 'math',
+        processEscapes: true
+      },
+      TeX: {
+      equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+      extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+      Macros: {bm: "\\boldsymbol"}
+      },
+      'HTML-CSS': { linebreaks: { automatic: true } },
+      'preview-HTML': { linebreaks: { automatic: true } },
+      SVG: { linebreaks: { automatic: true } }
+      });
+  </script>
+  <!--CDN -->
+  <script src="//unpkg.com/docsify-plugin-toc"></script>
+  <script src="//unpkg.com/prismjs/components/prism-python.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-c.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-java.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-prism@latest/dist/docsify-prism.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+</body>
+</html>
